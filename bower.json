@@ -1,7 +1,7 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "zillow-get-search-result",
   "authors": [
-    "The Polymer Authors"
+    "Liang Yuan"
   ],
   "private": true,
   "dependencies": {

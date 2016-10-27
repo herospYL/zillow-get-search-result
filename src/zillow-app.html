@@ -22,12 +22,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="my-icons.html">
 
-<dom-module id="my-app">
+<dom-module id="zillow-app">
   <template>
     <style>
       :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
+        --app-primary-color: #0074e4;
+        --app-secondary-color: #e2effc;
 
         display: block;
       }
@@ -51,13 +51,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         text-decoration: none;
 
-        color: var(--app-secondary-color);
+        color: var(--secondary-text-color);
 
         line-height: 40px;
       }
 
       .drawer-list a.iron-selected {
-        color: black;
+        color: var(--app-primary-color);
 
         font-weight: bold;
       }
@@ -75,9 +75,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer>
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+          <a name="content-view" href="/content-view">Content View</a>
         </iron-selector>
       </app-drawer>
 
@@ -87,7 +85,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>Zillow Get Search Result</div>
           </app-toolbar>
         </app-header>
 
@@ -96,10 +94,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <my-view404 name="view404"></my-view404>
+          <zillow-content-view name="content-view"></zillow-content-view>
+          <zillow-view404 name="view404"></zillow-view404>
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
@@ -107,7 +103,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     Polymer({
-      is: 'my-app',
+      is: 'zillow-app',
 
       properties: {
         page: {
@@ -122,12 +118,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ],
 
       _routePageChanged: function(page) {
-        this.page = page || 'view1';
+        this.page = page || 'content-view';
       },
 
       _pageChanged: function(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        var resolvedPageUrl = this.resolveUrl('zillow-' + page + '.html');
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
       },
 
