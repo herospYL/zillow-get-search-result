@@ -1,0 +1,26 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="zillow-main-view">
+    <template>
+        <style>
+            :host {
+                display: block;
+
+                padding: 10em;
+            }
+
+        </style>
+
+        <paper-input id="main-search" value="{{input}}">
+            <template is="dom-if" if="[[hideClear]]">
+                <paper-icon-button prefix icon="clear" alt="clear" title="clear" on-tap="clearInput"></paper-icon-button>
+            </template>
+
+            <paper-icon-button suffix icon="search" alt="search" title="search"></paper-icon-button>
+        </paper-input>
+    </template>
+</dom-module>
+<script src="zillow-main-view.js"></script>

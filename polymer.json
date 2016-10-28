@@ -2,8 +2,8 @@
   "entrypoint": "index.html",
   "shell": "src/zillow-app.html",
   "fragments": [
-    "src/zillow-content-view.html",
-    "src/zillow-view404.html"
+    "src/zillow-content-view/zillow-content-view.html",
+    "src/zillow-view404/zillow-view404.html"
   ],
   "sourceGlobs": [
    "src/**/*",
