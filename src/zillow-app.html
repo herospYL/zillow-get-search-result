@@ -83,10 +83,10 @@
                 vertical-align: middle;
 
                 --paper-input-container-input-color: white;
-                --paper-input-container-underline: {
+                --paper-address-container-underline: {
                     opacity: 0.0;
                 };
-                --paper-input-container-underline-focus: {
+                --paper-address-container-underline-focus: {
                     opacity: 0.0;
                 };
             }
@@ -113,7 +113,7 @@
                             effects-config='{"resize-snapped-title": {"startsAt": 0.8, "duration": "100ms"}, "fade-background": {"startsAt": 0.8, "endsAt": 0.9}}'>
                     <app-toolbar>
                         <a href="/main-view">
-                            <paper-icon-button icon="arrow-back"></paper-icon-button>
+                            <paper-icon-button icon="home"></paper-icon-button>
                         </a>
                         <h4 condensed-title hidden$="[[showSearchBar]]">{{searchString}}</h4>
                         <template is="dom-if" if="[[showSearchBar]]">
@@ -135,7 +135,6 @@
                     <zillow-main-view name="main-view"></zillow-main-view>
                     <zillow-content-view name="content-view"></zillow-content-view>
                     <!--TODO: Modify Title by listening the search event fired, double binding is not correct-->
-                    <!--TODO: Need recalculate content-view's height-->
                     <zillow-view404 name="view404"></zillow-view404>
                 </iron-pages>
             </app-header-layout>

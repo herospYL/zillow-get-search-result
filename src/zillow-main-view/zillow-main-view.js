@@ -3,18 +3,18 @@
   Polymer({
     is: 'zillow-main-view',
     properties: {
-      input: {
+      address: {
         type: String,
         notify: true
       },
-      hideClear: false
-    },
-    observers: ['_hideClearButton(input)'],
-    _hideClearButton: function(input) {
-      return this.set('hideClear', !!input);
-    },
-    clearInput: function() {
-      return this.set('input', "");
+      cityState: {
+        type: String,
+        notify: true
+      },
+      zip: {
+        type: String,
+        notify: true
+      }
     }
   });
 

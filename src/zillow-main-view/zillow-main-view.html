@@ -1,10 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <dom-module id="zillow-main-view">
     <template>
+        <style include="iron-flex-layout"></style>
         <style>
             :host {
                 display: block;
@@ -12,15 +14,70 @@
                 padding: 10em;
             }
 
+            .combined-search {
+                padding: 5px;
+                margin: 0;
+            }
+
+            .flex-equal-with-ratios {
+                @apply(--layout-horizontal);
+            }
+
+            .flex-equal-with-ratios paper-input {
+                --paper-input-container-focus-color: var(--app-primary-color);
+            }
+
+            .flexChild1 {
+                @apply(--layout-flex);
+            }
+
+            .flexChild2 {
+                @apply(--layout-flex-2);
+            }
+
+            .flexChild4 {
+                @apply(--layout-flex-4);
+            }
+
+            .flexChildEnd {
+                @apply(--layout-horizontal);
+                @apply(--layout-end);
+                @apply(--layout-center-justified);
+            }
+
+            .flexChildEnd paper-button {
+                background-color: var(--app-primary-color);
+                color: white;
+            }
+
         </style>
 
-        <paper-input id="main-search" value="{{input}}">
-            <template is="dom-if" if="[[hideClear]]">
-                <paper-icon-button prefix icon="clear" alt="clear" title="clear" on-tap="clearInput"></paper-icon-button>
-            </template>
-
-            <paper-icon-button suffix icon="search" alt="search" title="search"></paper-icon-button>
-        </paper-input>
+        <div class="combined-search flex-equal-with-ratios">
+            <paper-input
+                    id="main-address"
+                    class="flexChild4"
+                    label="Address"
+                    required
+                    value="{{address}}"
+                    autosave="address"></paper-input>
+            <paper-input
+                    id="main-city-state"
+                    class="flexChild2"
+                    label="City State"
+                    required
+                    value="{{cityState}}"
+                    autosave="cityState"></paper-input>
+            <paper-input
+                    id="main-zip"
+                    class="flexChild1"
+                    label="ZIP"
+                    value="{{zip}}"
+                    autosave="zip">
+            </paper-input>
+            <div class="flexChild1 flexChildEnd">
+                <paper-button alt="search" title="search">Search</paper-button>
+            </div>
+        </div>
     </template>
 </dom-module>
 <script src="zillow-main-view.js"></script>

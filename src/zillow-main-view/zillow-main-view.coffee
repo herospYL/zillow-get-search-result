@@ -2,18 +2,14 @@ Polymer
   is: 'zillow-main-view'
 
   properties:
-    input:
+    address:
       type: String
       notify: true
 
-    hideClear: false
+    cityState:
+      type: String
+      notify: true
 
-  observers: [
-    '_hideClearButton(input)'
-  ]
-
-  _hideClearButton: (input) ->
-    return @set('hideClear', !!input)
-
-  clearInput: ->
-    @set('input', "")
+    zip:
+      type: String
+      notify: true
