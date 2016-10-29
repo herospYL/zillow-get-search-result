@@ -5,6 +5,9 @@
 This template is a starting point for building apps using a drawer-based
 layout. The layout is provided by `app-layout` elements.
 
+### Example URL:
+liangyuanzillow.azurewebsites.net
+
 ### Setup
 
 ##### Prerequisites

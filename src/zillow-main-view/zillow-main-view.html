@@ -3,20 +3,27 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-request.html">
 
 <dom-module id="zillow-main-view">
     <template>
-        <style include="iron-flex-layout"></style>
-        <style>
+        <style include="iron-flex-layout">
             :host {
                 display: block;
 
                 padding: 10em;
+                background-color: white;
             }
 
             .combined-search {
                 padding: 5px;
                 margin: 0;
+            }
+
+            .zillow-logo{
+                text-align: center;
+                padding: 10px;
+                margin-top: 30px;
             }
 
             .flex-equal-with-ratios {
@@ -52,6 +59,7 @@
 
         </style>
 
+        <iron-request id="xhr"></iron-request>
         <div class="combined-search flex-equal-with-ratios">
             <paper-input
                     id="main-address"
@@ -75,8 +83,16 @@
                     autosave="zip">
             </paper-input>
             <div class="flexChild1 flexChildEnd">
-                <paper-button alt="search" title="search">Search</paper-button>
+                <paper-button alt="search" title="search" on-tap="_testGet">Search</paper-button>
             </div>
+        </div>
+        <div class="zillow-logo">
+            <a href="http://www.zillow.com/">
+                <img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif"
+                     width="200"
+                     height="50"
+                     alt="Real Estate on Zillow">
+            </a>
         </div>
     </template>
 </dom-module>

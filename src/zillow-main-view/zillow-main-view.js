@@ -14,7 +14,29 @@
       zip: {
         type: String,
         notify: true
+      },
+      validResult: {
+        type: Object,
+        notify: true
+      },
+      invalidResult: {
+        type: Object,
+        notify: true
       }
+    },
+    _testGet: function() {
+      var promise;
+      promise = this.$.xhr.send({
+        handleAs: 'xml'
+      });
+      return promise.then((function(_this) {
+        return function(result) {
+          var obj;
+          console.log(result.response);
+          obj = result.response.getElementsByTagName('response')[0];
+          console.log(obj);
+        };
+      })(this));
     }
   });
 
