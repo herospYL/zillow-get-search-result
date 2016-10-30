@@ -4,4 +4,3 @@ Polymer
   properties:
     contentData:
       type: Object
-      notify: true

@@ -77,21 +77,6 @@
                 font-style: normal;
             }
 
-            [condensed-search] {
-                width: 100%;
-                font-weight: lighter;
-                margin-left: 30px;
-                vertical-align: middle;
-
-                --paper-input-container-input-color: white;
-                --paper-address-container-underline: {
-                    opacity: 0.0;
-                };
-                --paper-address-container-underline-focus: {
-                    opacity: 0.0;
-                };
-            }
-
             @media (max-width: 639px) {
                 [main-title] {
                     left: 85px;
@@ -116,12 +101,7 @@
                         <a href="/main-view">
                             <paper-icon-button icon="home"></paper-icon-button>
                         </a>
-                        <h4 condensed-title hidden$="[[showSearchBar]]">{{searchString}}</h4>
-                        <template is="dom-if" if="[[showSearchBar]]">
-                            <paper-icon-button prefix icon="clear" alt="clear" title="clear"></paper-icon-button>
-                            <paper-input condensed-search no-label-float></paper-input>
-                            <paper-icon-button suffix icon="arrow-forward" alt="go" title="go"></paper-icon-button>
-                        </template>
+                        <h4 condensed-title>{{searchString}}</h4>
                         <paper-icon-button icon="search" alt="search" title="search"
                                            on-tap="toggleSearchBar"></paper-icon-button>
                     </app-toolbar>

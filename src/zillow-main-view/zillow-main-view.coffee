@@ -16,20 +16,18 @@ Polymer
 
     validResult:
       type: Object
-      notify: true
 
     invalidResult:
       type: Object
-      notify: true
 
   _testGet: ->
     promise = @$.xhr.send({
+      url: "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1fi61fdynm3_9r65p&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA",
       handleAs: 'xml'
     })
 
     promise.then (result) =>
       console.log(result.response)
-#      console.log(result.response.getElementsByTagName('response')[0])
       obj = result.response.getElementsByTagName('response')[0]
       console.log(obj)
       return

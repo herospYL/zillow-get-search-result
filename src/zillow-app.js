@@ -10,15 +10,11 @@
       searchString: {
         type: String,
         value: 'Zillow Get Search Result'
-      },
-      showSearchBar: false
+      }
     },
     observers: ['_routePageChanged(routeData.page)'],
     _routePageChanged: function(page) {
       this.page = page || 'main-view';
-    },
-    toggleSearchBar: function() {
-      return this.set('showSearchBar', !this.showSearchBar);
     }
   });
 
