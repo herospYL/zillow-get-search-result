@@ -1,5 +1,4 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
@@ -8,20 +7,50 @@
 <link rel="import" href="../../../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 
+<!--Local Import-->
+<link rel="import" href="../../shared-styles.html">
+
 <dom-module id="zillow-content-overview">
     <template>
+        <style include="shared-styles"></style>
         <style include="iron-flex-layout">
             :host {
                 display: block;
 
                 padding: 10px;
             }
+
+            .overview-top .circle {
+                margin: 0 0.3em;
+            }
+
+            .overview-top .overview-title {
+                display: inline-block;
+
+                margin-left: 20px;
+                font-size: smaller;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                vertical-align: bottom;
+            }
+
+            .overview-top .overview-title h3 {
+                margin-bottom: 0;
+            }
         </style>
 
         <div class="content-overview">
-            <div>
-                <h1>[[overviewData.address.street]]</h1>
-                <h2>[[overviewData.address.city]] [[overviewData.address.state]], [[overviewData.address.zipcode]]</h2>
+            <div class="overview-top">
+                <!--TODO: Could be used as which item in the result array that is selected-->
+                <div class="circle">1</div>
+                <div class="overview-title">
+                    <h2>[[overviewData.address.street]]</h2>
+                    <h3>
+                        <span>[[overviewData.address.city]]</span>
+                        <span>[[overviewData.address.state]],</span>
+                        <span>[[overviewData.address.zipcode]]</span>
+                    </h3>
+                </div>
                 <a href="http://www.zillow.com/">
                     <img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif"
                          width="200"
@@ -29,23 +58,31 @@
                          alt="Real Estate on Zillow">
                 </a>
             </div>
-            <div>
-                <paper-button>
-                    <iron-icon icon="info"></iron-icon>
-                    Home Details
-                </paper-button>
-                <paper-button>
-                    <iron-icon icon="editor:insert-chart"></iron-icon>
-                    Graphs & Data
-                </paper-button>
-                <paper-button>
-                    <iron-icon icon="maps:place"></iron-icon>
-                    Map This Home
-                </paper-button>
-                <paper-button>
-                    <iron-icon icon="image:compare"></iron-icon>
-                    Comparables
-                </paper-button>
+            <div class="content-links">
+                <a href$="[[overviewData.links.homedetails]]" tabindex="-1">
+                    <paper-button>
+                        <iron-icon icon="info"></iron-icon>
+                        Home Details
+                    </paper-button>
+                </a>
+                <a href$="[[overviewData.links.graphsanddata]]" tabindex="-1">
+                    <paper-button>
+                        <iron-icon icon="editor:insert-chart"></iron-icon>
+                        Graphs & Data
+                    </paper-button>
+                </a>
+                <a href$="[[overviewData.links.mapthishome]]" tabindex="-1">
+                    <paper-button>
+                        <iron-icon icon="maps:place"></iron-icon>
+                        Map This Home
+                    </paper-button>
+                </a>
+                <a href$="[[overviewData.links.comparables]]" tabindex="-1">
+                    <paper-button>
+                        <iron-icon icon="image:compare"></iron-icon>
+                        Comparables
+                    </paper-button>
+                </a>
             </div>
         </div>
     </template>

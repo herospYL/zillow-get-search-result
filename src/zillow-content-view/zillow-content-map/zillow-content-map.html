@@ -1,0 +1,22 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../../bower_components/google-map/google-map-marker.html">
+
+<dom-module id="zillow-content-map">
+    <template>
+        <style>
+            :host {
+                display: block;
+
+                padding: 10px;
+                height: 50vh;
+                width: 100%;
+            }
+        </style>
+        <google-map id="gMap" fit-to-markers zoom="15" api-key="[[gMapApiKey]]">
+            <google-map-marker id="gMarker" draggable></google-map-marker>
+        </google-map>
+    </template>
+</dom-module>
+<script src="../sample-response.js"></script>
+<script src="zillow-content-map.js"></script>

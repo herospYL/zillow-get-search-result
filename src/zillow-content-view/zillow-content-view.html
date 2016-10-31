@@ -1,23 +1,75 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout">
 <link rel="import" href="../shared-styles.html">
 
 <!--Local Import-->
 <link rel="import" href="zillow-content-overview/zillow-content-overview.html">
+<link rel="import" href="zillow-content-map/zillow-content-map.html">
+<link rel="import" href="zillow-content-zestimate/zillow-content-zestimate.html">
+<link rel="import" href="zillow-content-local-real-estate/zillow-content-local-real-estate.html">
 
 <dom-module id="zillow-content-view">
     <template>
-        <style include="shared-styles">
+        <style include="shared-styles"></style>
+        <style include="iron-flex-layout">
             :host {
                 display: block;
 
                 padding: 10px;
             }
+
+            .flex-vertical {
+                @apply(--layout-vertical);
+            }
+
+            .flex-horizontal {
+                @apply(--layout-horizontal);
+            }
+
+            .flexChild {
+                @apply(--layout-flex);
+            }
+
+            .flex-horizontal .left-card  {
+                margin-right: 6px;
+            }
+
+            .flex-horizontal .right-card {
+                margin-left: 6px;
+            }
+
+            .flex-horizontal .top-card {
+                margin-bottom: 6px;
+            }
+
+            .flex-horizontal .bottom-card {
+                margin-top: 6px;
+            }
         </style>
 
-        <div class="card">
-            <!--TODO: Could be used as which item in the result array that is selected-->
-            <div class="circle">1</div>
-            <zillow-content-overview></zillow-content-overview>
+        <div class="flex-horizontal">
+            <div class="flexChild flex-vertical">
+                <div class="flexChild">
+                    <div class="card left-card top-card">
+                        <zillow-content-overview></zillow-content-overview>
+                    </div>
+                </div>
+                <div class="flexChild">
+                    <div class="card left-card top-card bottom-card">
+                        <zillow-content-zestimate></zillow-content-zestimate>
+                    </div>
+                </div>
+                <div class="flexChild">
+                    <div class="card left-card bottom-card">
+                        <zillow-content-local-real-estate></zillow-content-local-real-estate>
+                    </div>
+                </div>
+            </div>
+            <div class="flexChild">
+                <div class="card right-card top-card">
+                    <zillow-content-map></zillow-content-map>
+                </div>
+            </div>
         </div>
     </template>
 </dom-module>
