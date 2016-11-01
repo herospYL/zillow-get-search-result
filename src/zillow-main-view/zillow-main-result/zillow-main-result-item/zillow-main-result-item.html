@@ -1,0 +1,47 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/paper-item/paper-item.html">
+
+<dom-module id="zillow-main-result-item">
+    <template>
+        <style include="iron-flex-layout">
+            :host {
+                display: block;
+            }
+
+            a {
+                text-decoration: none;
+                color: var(--secondary-text-color);
+            }
+
+            paper-item {
+                font-weight: bolder;
+                text-align: center;
+            }
+
+            paper-item > div {
+                text-align: center;
+
+                width: 100%;
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+            }
+
+            paper-item > div span{
+                padding: 0 2px;
+            }
+
+        </style>
+        <a href="/content-view">
+            <paper-item id="result-item">
+                <div class="result-detail">
+                    <span id="address">[[address]],</span>
+                    <span id="city">[[city]]</span>
+                    <span id="state">[[state]]</span>
+                    <span id="zip">[[zip]]</span>
+                </div>
+            </paper-item>
+        </a>
+    </template>
+</dom-module>
+<script src="zillow-main-result-item.js"></script>

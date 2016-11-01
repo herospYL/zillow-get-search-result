@@ -22,9 +22,17 @@
     "paper-button": "^1.0.14",
     "paper-card": "^0.1.5",
     "google-map": "^1.1.14",
-    "paper-slider": "^1.0.12"
+    "paper-slider": "^1.0.12",
+    "paper-listbox": "^1.1.2",
+    "paper-item": "^1.2.1",
+    "paper-toast": "^1.3.0",
+    "iron-component-page": "^1.1.7"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
+  },
+  "resolutions": {
+    "polymer": "^1.0.0",
+    "paper-ripple": "^1.0.0"
   }
 }

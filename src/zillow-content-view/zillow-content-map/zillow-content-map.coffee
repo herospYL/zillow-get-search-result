@@ -1,6 +1,3 @@
-root = exports ? this
-
-SearchResults = root.SearchResults
 #TODO: API Key hardcoded!
 
 Polymer
@@ -9,7 +6,6 @@ Polymer
   properties:
     mapData:
       type: Object
-      value: SearchResults.response.results[0].result.address
       observer: '_calculateCoordinates'
 
     gMapApiKey:

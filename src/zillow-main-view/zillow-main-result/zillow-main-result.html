@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
 
-</body>
-</html>
+<!--Local Imports-->
+<link rel="import" href="zillow-main-result-item/zillow-main-result-item.html">
+
+<dom-module id="zillow-main-result">
+    <template>
+        <style include="iron-flex-layout">
+            :host {
+                display: block;
+            }
+
+
+        </style>
+        <paper-listbox class="main-result" id="listbox" selected="{{validSearchSelected}}">
+            <!--Dynamically inserting children elements-->
+        </paper-listbox>
+    </template>
+</dom-module>
+<script src="zillow-main-result.js"></script>

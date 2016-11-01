@@ -3,9 +3,8 @@
   Polymer({
     is: 'zillow-content-view',
     properties: {
-      contentData: {
-        type: Object
-      }
+      contentData: Object,
+      contentSelected: Number
     }
   });
 

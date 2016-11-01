@@ -3,39 +3,86 @@
   Polymer({
     is: 'zillow-main-view',
     properties: {
-      address: {
-        type: String,
+      address: String,
+      cityState: String,
+      zip: String,
+      validSearchResults: {
+        type: Array,
+        value: function() {
+          return [];
+        },
         notify: true
       },
-      cityState: {
-        type: String,
+      validSearchSelected: {
+        type: Number,
         notify: true
       },
-      zip: {
-        type: String,
-        notify: true
-      },
-      validResult: {
-        type: Object
-      },
-      invalidResult: {
-        type: Object
-      }
+      isInvalid: Boolean,
+      invalidSearchResult: String,
+      showClear: false
     },
-    _testGet: function() {
-      var promise;
-      promise = this.$.xhr.send({
-        url: "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1fi61fdynm3_9r65p&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA",
-        handleAs: 'xml'
-      });
-      return promise.then((function(_this) {
+    observers: ['hideClear(address, cityState, zip, validSearchResults, invalidSearchResult)'],
+    hideClear: function(address, cityState, zip, validSearchResults, invalidSearchResult) {
+      var addressNull, cityStateNull, invalidSearchResultNull, validSearchResultsNull, zipNull;
+      addressNull = address === void 0 || (address != null ? address.length : void 0) === 0;
+      cityStateNull = cityState === void 0 || (cityState != null ? cityState.length : void 0) === 0;
+      zipNull = zip === void 0 || (zip != null ? zip.length : void 0) === 0;
+      validSearchResultsNull = validSearchResults === void 0 || (validSearchResults != null ? validSearchResults.length : void 0) === 0;
+      invalidSearchResultNull = invalidSearchResult === void 0 || (invalidSearchResult != null ? invalidSearchResult.length : void 0) === 0;
+      this.set('showClear', !(addressNull && cityStateNull && zipNull && validSearchResultsNull && invalidSearchResultNull));
+    },
+    clearPage: function() {
+      this.set('address', '');
+      this.set('cityState', '');
+      this.set('zip', '');
+      this.set('validSearchResults', []);
+      this.set('validSearchSelected', -1);
+      this.set('isInvalid', false);
+      this.set('invalidSearchResult', '');
+    },
+    fireSearch: function() {
+      var xhttp;
+      this.clearPage();
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = (function(_this) {
         return function(result) {
-          var obj;
-          console.log(result.response);
-          obj = result.response.getElementsByTagName('response')[0];
-          console.log(obj);
+          if (result.target.readyState === 4 && result.target.status === 200) {
+            return _this._parseResult(xhttp.responseXML);
+          }
         };
-      })(this));
+      })(this);
+      xhttp.open("GET", 'src/sample-response.xml', true);
+      return xhttp.send();
+    },
+    _constructSearchString: function() {},
+    _parseResult: function(doc) {
+      var arr, code, jsonObj, message, messageText, response, results, searchResults, x2js;
+      if (doc) {
+        x2js = new X2JS();
+        jsonObj = x2js.xml2json(doc);
+        searchResults = jsonObj.searchresults;
+        console.log(searchResults);
+        if (searchResults) {
+          message = searchResults.message;
+          if (message) {
+            code = message.code;
+            if (code !== "0") {
+              messageText = message.text;
+              this.set('invalidSearchResult', messageText);
+              this.set('isInvalid', true);
+            } else {
+              response = searchResults.response;
+              results = response.results;
+              if (!(results.result instanceof Array)) {
+                arr = [];
+                arr[0] = results.result;
+                results.result = arr;
+              }
+              this.set('validSearchResults', results.result);
+            }
+          }
+        }
+      }
     }
   });
 

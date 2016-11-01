@@ -51,23 +51,25 @@
             <div class="flexChild flex-vertical">
                 <div class="flexChild">
                     <div class="card left-card top-card">
-                        <zillow-content-overview></zillow-content-overview>
+                        <zillow-content-overview overview-selected="[[contentSelected]]"
+                                                 overview-data="[[contentData]]"></zillow-content-overview>
                     </div>
                 </div>
                 <div class="flexChild">
                     <div class="card left-card top-card bottom-card">
-                        <zillow-content-zestimate></zillow-content-zestimate>
+                        <zillow-content-zestimate zestimate-data="[[contentData.zestimate]]"></zillow-content-zestimate>
                     </div>
                 </div>
                 <div class="flexChild">
                     <div class="card left-card bottom-card">
-                        <zillow-content-local-real-estate></zillow-content-local-real-estate>
+                        <zillow-content-local-real-estate local-real-estate-data="[[contentData.localRealEstate.region]]">
+                        </zillow-content-local-real-estate>
                     </div>
                 </div>
             </div>
             <div class="flexChild">
                 <div class="card right-card top-card">
-                    <zillow-content-map></zillow-content-map>
+                    <zillow-content-map map-data="[[contentData.address]]"></zillow-content-map>
                 </div>
             </div>
         </div>

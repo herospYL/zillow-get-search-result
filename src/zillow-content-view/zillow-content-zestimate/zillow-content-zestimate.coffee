@@ -1,17 +1,11 @@
-root = exports ? this
-
-SearchResults = root.SearchResults
-
 Polymer
   is: 'zillow-content-zestimate'
 
   properties:
-    zestimateData:
-      type: Object
-      value: SearchResults.response.results[0].result.zestimate
+    zestimateData: Object
 
   observers: [
-    'valueChangeColor(zestimateData.valueChange.value)'
+    'valueChangeColor(zestimateData.valueChange.__text)'
   ]
 
   valueChangeColor: (value) ->

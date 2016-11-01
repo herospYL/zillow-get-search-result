@@ -42,7 +42,7 @@
         <div class="content-overview">
             <div class="overview-top">
                 <!--TODO: Could be used as which item in the result array that is selected-->
-                <div class="circle">1</div>
+                <div class="circle">[[_computeSelected(overviewSelected)]]</div>
                 <div class="overview-title">
                     <h2>[[overviewData.address.street]]</h2>
                     <h3>
@@ -87,5 +87,4 @@
         </div>
     </template>
 </dom-module>
-<script src="../sample-response.js"></script>
 <script src="zillow-content-overview.js"></script>

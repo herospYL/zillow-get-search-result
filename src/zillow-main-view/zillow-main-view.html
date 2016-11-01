@@ -1,9 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-request.html">
+
+<!--Local Imports-->
+<link rel="import" href="zillow-main-result/zillow-main-result.html">
 
 <dom-module id="zillow-main-view">
     <template>
@@ -61,30 +64,45 @@
 
         <iron-request id="xhr"></iron-request>
         <div class="combined-search flex-equal-with-ratios">
+            <div class="flexChildEnd">
+                <template is="dom-if" if="[[showClear]]">
+                    <paper-icon-button icon="close" alt="clear" title="clear" on-tap="clearPage"></paper-icon-button>
+                </template>
+            </div>
             <paper-input
                     id="main-address"
                     class="flexChild4"
                     label="Address"
                     required
                     value="{{address}}"
-                    autosave="address"></paper-input>
+                    autosave="address"
+                    error-message="[[invalidSearchResult]]"
+                    invalid="{{isInvalid}}">
+            </paper-input>
             <paper-input
                     id="main-city-state"
                     class="flexChild2"
                     label="City State"
                     required
                     value="{{cityState}}"
-                    autosave="cityState"></paper-input>
+                    autosave="cityState"
+                    invalid="{{isInvalid}}"></paper-input>
             <paper-input
                     id="main-zip"
                     class="flexChild1"
                     label="ZIP"
                     value="{{zip}}"
-                    autosave="zip">
+                    autosave="zip"
+                    invalid="{{isInvalid}}">
             </paper-input>
             <div class="flexChild1 flexChildEnd">
-                <paper-button alt="search" title="search" on-tap="_testGet">Search</paper-button>
+                <paper-button alt="search" title="search" on-tap="fireSearch">Search</paper-button>
             </div>
+        </div>
+        <div class="search-result">
+            <zillow-main-result valid-search-results="[[validSearchResults]]"
+                                valid-search-selected="{{validSearchSelected}}">
+            </zillow-main-result>
         </div>
         <div class="zillow-logo">
             <a href="http://www.zillow.com/">
@@ -99,3 +117,4 @@
     </template>
 </dom-module>
 <script src="zillow-main-view.js"></script>
+<script src="../xml2json.js"></script>
