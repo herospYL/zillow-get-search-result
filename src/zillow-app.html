@@ -97,7 +97,8 @@
                             effects="waterfall resize-snapped-title fade-background"
                             effects-config='{"resize-snapped-title": {"startsAt": 0.8, "duration": "100ms"}, "fade-background": {"startsAt": 0.8, "endsAt": 0.9}}'>
                     <app-toolbar>
-                        <a href="/main-view">
+                        <!--Main View has empty string as default-->
+                        <a href="/">
                             <paper-icon-button icon="home"></paper-icon-button>
                         </a>
                         <h4 condensed-title>{{searchString}}</h4>
@@ -110,7 +111,8 @@
                         attr-for-selected="name"
                         fallback-selection="view404"
                         role="main">
-                    <zillow-main-view name="main-view"
+                    <!--Main View has empty string as default-->
+                    <zillow-main-view name=""
                                       valid-search-results="{{validSearchResults}}"
                                       valid-search-selected="{{validSearchSelected}}">
                     </zillow-main-view>

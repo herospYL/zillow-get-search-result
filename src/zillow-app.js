@@ -26,7 +26,7 @@
     },
     observers: ['_routePageChanged(routeData.page)'],
     _routePageChanged: function(page) {
-      this.page = page || 'main-view';
+      this.page = page || '';
     },
     _selectResults: function() {
       var obj, ref;

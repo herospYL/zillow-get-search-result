@@ -24,8 +24,9 @@ Polymer
   observers:
     ['_routePageChanged(routeData.page)']
 
+#  Default to Index.html
   _routePageChanged: (page) ->
-    @page = page || 'main-view'
+    @page = page || ''
     return
 
   _selectResults: () ->
