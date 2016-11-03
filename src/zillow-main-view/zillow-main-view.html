@@ -64,8 +64,7 @@
         </style>
 
         <iron-ajax id="ajax"
-                   url="http://www.zillow.com/webservice/GetSearchResults.htm"
-                   handle-as="xml"
+                   url="http://liangyuanzillowapi.azurewebsites.net/api/zillow"
                    on-response="handleResponse"
                    on-error="handleError"
                    decounce-duration="300"></iron-ajax>
@@ -120,8 +119,6 @@
                      alt="Real Estate on Zillow">
             </a>
         </div>
-        <!--TODO: Show search results thumbnails-->
-        <div></div>
     </template>
 </dom-module>
 <script src="zillow-main-view.js"></script>

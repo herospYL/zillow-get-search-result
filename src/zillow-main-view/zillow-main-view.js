@@ -28,11 +28,7 @@
       },
       isInvalid: Boolean,
       invalidSearchResult: String,
-      showClear: false,
-      ZWSID: {
-        type: String,
-        value: 'X1-ZWz1fi61fdynm3_9r65p'
-      }
+      showClear: false
     },
     observers: ['hideClear(address, cityState, zip, validSearchResults, invalidSearchResult)'],
     hideClear: function(address, cityState, zip, validSearchResults, invalidSearchResult) {
@@ -61,7 +57,6 @@
       var ajax, queryParam;
       this.clearResult();
       queryParam = {};
-      queryParam["zws-id"] = this.ZWSID;
       queryParam["address"] = this.address;
       queryParam["citystatezip"] = this.cityState + " " + this.zip;
       ajax = this.$.ajax;
@@ -76,11 +71,11 @@
     handleError: function(event, detail) {
       this.fire('toast-error', detail.error);
     },
-    _parseResult: function(doc) {
+    _parseResult: function(str) {
       var arr, code, i, jsonObj, len, lre, message, messageText, re, ref, regArr, response, results, searchResults, x2js;
-      if (doc) {
+      if (str) {
         x2js = new X2JS();
-        jsonObj = x2js.xml2json(doc);
+        jsonObj = x2js.xml_str2json(str);
         searchResults = jsonObj.searchresults;
         if (searchResults) {
           message = searchResults.message;

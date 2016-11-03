@@ -29,9 +29,7 @@ Polymer
 
     showClear: false
     
-    ZWSID:
-      type: String
-      value: 'X1-ZWz1fi61fdynm3_9r65p'
+#    ZWSID: String
 
   observers: [
     'hideClear(address, cityState, zip, validSearchResults, invalidSearchResult)'
@@ -73,7 +71,7 @@ Polymer
 #      @_getZWSID()
 
     queryParam = {}
-    queryParam["zws-id"] = @ZWSID
+#    queryParam["zws-id"] = @ZWSID
     queryParam["address"] = @address
     queryParam["citystatezip"] = "#{@cityState} #{@zip}"
 
@@ -101,10 +99,10 @@ Polymer
 #      @set('ZWSID', result.response)
 #      return
 
-  _parseResult: (doc) ->
-    if doc
+  _parseResult: (str) ->
+    if str
       x2js = new X2JS()
-      jsonObj = x2js.xml2json(doc)
+      jsonObj = x2js.xml_str2json(str)
       searchResults = jsonObj.searchresults
 
       if searchResults

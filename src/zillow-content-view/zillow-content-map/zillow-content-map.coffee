@@ -8,17 +8,15 @@ Polymer
       type: Object
       observer: '_calculateCoordinates'
 
-    gMapApiKey:
-      type: String
-      value: 'AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc'
+    gMapApiKey: String
 
-#  ready: ->
-#    @_getGoogleMapKey()
-#    return
+  ready: ->
+    @_getGoogleMapKey()
+    return
 
   _calculateCoordinates: ->
-#    if @gMapApiKey == undefined || @gMapApiKey == null
-#      @_getGoogleMapKey()
+    if @gMapApiKey == undefined || @gMapApiKey == null
+      @_getGoogleMapKey()
     map = @$.gMap
     marker = @$.gMarker
 
@@ -30,8 +28,7 @@ Polymer
 
   _getGoogleMapKey: ->
     promise = @$.xhr.send({
-      url: "http://liangyuanzillowapi.azurewebsites.net/api/googlemapkey",
-      handleAs: 'json'
+      url: "http://liangyuanzillowapi.azurewebsites.net/api/googlemapkey"
     })
 
     promise.then (result) =>
