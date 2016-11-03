@@ -7,34 +7,19 @@
         type: Object,
         observer: '_calculateCoordinates'
       },
-      gMapApiKey: String
-    },
-    ready: function() {
-      this._getGoogleMapKey();
+      gMapApiKey: {
+        type: String,
+        value: 'AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc'
+      }
     },
     _calculateCoordinates: function() {
       var map, marker;
-      if (this.gMapApiKey === void 0 || this.gMapApiKey === null) {
-        this._getGoogleMapKey();
-      }
       map = this.$.gMap;
       marker = this.$.gMarker;
       map.latitude = parseFloat(this.mapData.latitude);
       map.longitude = parseFloat(this.mapData.longitude);
       marker.latitude = parseFloat(this.mapData.latitude);
       marker.longitude = parseFloat(this.mapData.longitude);
-    },
-    _getGoogleMapKey: function() {
-      var promise;
-      promise = this.$.xhr.send({
-        url: "http://liangyuanzillowapi.azurewebsites.net/api/googlemapkey"
-      });
-      return promise.then((function(_this) {
-        return function(result) {
-          console.log(result.response);
-          _this.set('gMapApiKey', result.response);
-        };
-      })(this));
     }
   });
 
