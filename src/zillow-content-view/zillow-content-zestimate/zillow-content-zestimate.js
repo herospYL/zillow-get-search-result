@@ -6,10 +6,10 @@
       zestimateData: Object,
       zestimateKind: String
     },
-    observers: ['valueChangeColor(zestimateData.valueChange.Value)'],
+    observers: ['valueChangeColor(zestimateData.valueChange.__text)'],
     getCurrencySign: function(currency) {
       switch (currency) {
-        case 0:
+        case "USD":
           return '$';
         default:
           return '';

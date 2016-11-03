@@ -1,6 +1,7 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/google-map/google-map.html">
 <link rel="import" href="../../../bower_components/google-map/google-map-marker.html">
+<link rel="import" href="../../../bower_components/iron-ajax/iron-request.html">
 
 <dom-module id="zillow-content-map">
     <template>
@@ -13,6 +14,7 @@
                 width: 100%;
             }
         </style>
+        <iron-request id="xhr"></iron-request>
         <google-map id="gMap" fit-to-markers zoom="15" api-key="[[gMapApiKey]]">
             <google-map-marker id="gMarker" draggable></google-map-marker>
         </google-map>

@@ -7,12 +7,12 @@ Polymer
     zestimateKind: String
 
   observers: [
-    'valueChangeColor(zestimateData.valueChange.Value)'
+    'valueChangeColor(zestimateData.valueChange.__text)'
   ]
 
   getCurrencySign: (currency) ->
     switch currency
-      when 0
+      when "USD"
         return '$'
       else
         return ''

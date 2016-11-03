@@ -16,10 +16,23 @@
       var map, marker;
       map = this.$.gMap;
       marker = this.$.gMarker;
-      map.latitude = this.mapData.latitude;
-      map.longitude = this.mapData.longitude;
-      marker.latitude = this.mapData.latitude;
-      marker.longitude = this.mapData.longitude;
+      map.latitude = parseFloat(this.mapData.latitude);
+      map.longitude = parseFloat(this.mapData.longitude);
+      marker.latitude = parseFloat(this.mapData.latitude);
+      marker.longitude = parseFloat(this.mapData.longitude);
+    },
+    _getGoogleMapKey: function() {
+      var promise;
+      promise = this.$.xhr.send({
+        url: "http://liangyuanzillowapi.azurewebsites.net/api/googlemapkey",
+        handleAs: 'json'
+      });
+      return promise.then((function(_this) {
+        return function(result) {
+          console.log(result.response);
+          _this.set('gMapApiKey', result.response);
+        };
+      })(this));
     }
   });
 

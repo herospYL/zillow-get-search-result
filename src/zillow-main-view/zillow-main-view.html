@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-request.html">
 
 <!--Local Imports-->
 <link rel="import" href="zillow-main-result/zillow-main-result.html">
@@ -63,11 +64,12 @@
         </style>
 
         <iron-ajax id="ajax"
-                   url="http://liangyuanzillowapi.azurewebsites.net/api/zillow"
-                   handle-as="json"
+                   url="http://www.zillow.com/webservice/GetSearchResults.htm"
+                   handle-as="xml"
                    on-response="handleResponse"
                    on-error="handleError"
                    decounce-duration="300"></iron-ajax>
+        <iron-request id="xhr"></iron-request>
         <div class="combined-search flex-equal-with-ratios">
             <div class="flexChildEnd">
                 <template is="dom-if" if="[[showClear]]">
@@ -91,7 +93,8 @@
                     required
                     value="{{cityState}}"
                     autosave="cityState"
-                    invalid="{{isInvalid}}"></paper-input>
+                    invalid="{{isInvalid}}">
+            </paper-input>
             <paper-input
                     id="main-zip"
                     class="flexChild1"
@@ -122,3 +125,4 @@
     </template>
 </dom-module>
 <script src="zillow-main-view.js"></script>
+<script src="../xml2json.js"></script>

@@ -3,9 +3,18 @@
   Polymer({
     is: 'zillow-main-view',
     properties: {
-      address: String,
-      cityState: String,
-      zip: String,
+      address: {
+        type: String,
+        notify: true
+      },
+      cityState: {
+        type: String,
+        notify: true
+      },
+      zip: {
+        type: String,
+        notify: true
+      },
       validSearchResults: {
         type: Array,
         value: function() {
@@ -19,9 +28,13 @@
       },
       isInvalid: Boolean,
       invalidSearchResult: String,
-      showClear: false
+      showClear: false,
+      ZWSID: String
     },
     observers: ['hideClear(address, cityState, zip, validSearchResults, invalidSearchResult)'],
+    attached: function() {
+      this._getZWSID();
+    },
     hideClear: function(address, cityState, zip, validSearchResults, invalidSearchResult) {
       var addressNull, cityStateNull, invalidSearchResultNull, validSearchResultsNull, zipNull;
       addressNull = address === void 0 || (address != null ? address.length : void 0) === 0;
@@ -35,6 +48,9 @@
       this.set('address', '');
       this.set('cityState', '');
       this.set('zip', '');
+      this.clearResult();
+    },
+    clearResult: function() {
       this.set('validSearchResults', []);
       this.set('validSearchSelected', -1);
       this.set('isInvalid', false);
@@ -43,8 +59,12 @@
     },
     fireSearch: function() {
       var ajax, queryParam;
-      this.clearPage();
+      this.clearResult();
+      if (this.ZWSID === void 0 || this.ZWSID === null) {
+        this._getZWSID();
+      }
       queryParam = {};
+      queryParam["zws-id"] = this.ZWSID;
       queryParam["address"] = this.address;
       queryParam["citystatezip"] = this.cityState + " " + this.zip;
       ajax = this.$.ajax;
@@ -52,24 +72,64 @@
       ajax.generateRequest();
     },
     handleResponse: function(event, detail) {
-      var code, message, messageText, response;
       if (detail.response) {
-        message = detail.response.message;
-        if (message) {
-          code = message.code;
-          if (code !== "0") {
-            messageText = message.text;
-            this.set('invalidSearchResult', messageText);
-            this.set('isInvalid', true);
-          } else {
-            response = detail.response.response;
-            this.set('validSearchResults', response.results);
-          }
-        }
+        this._parseResult(detail.response);
       }
     },
     handleError: function(event, detail) {
       this.fire('toast-error', detail.error);
+    },
+    _getZWSID: function() {
+      var promise;
+      promise = this.$.xhr.send({
+        url: "http://liangyuanzillowapi.azurewebsites.net/api/zillow",
+        handleAs: 'json'
+      });
+      return promise.then((function(_this) {
+        return function(result) {
+          _this.set('ZWSID', result.response);
+        };
+      })(this));
+    },
+    _parseResult: function(doc) {
+      var arr, code, i, jsonObj, len, lre, message, messageText, re, ref, regArr, response, results, searchResults, x2js;
+      if (doc) {
+        x2js = new X2JS();
+        jsonObj = x2js.xml2json(doc);
+        searchResults = jsonObj.searchresults;
+        if (searchResults) {
+          message = searchResults.message;
+          if (message) {
+            code = message.code;
+            if (code !== "0") {
+              messageText = message.text;
+              this.set('invalidSearchResult', messageText);
+              this.set('isInvalid', true);
+            } else {
+              response = searchResults.response;
+              results = response.results;
+              if (!(results.result instanceof Array)) {
+                arr = [];
+                arr[0] = results.result;
+                results.result = arr;
+              }
+              ref = results.result;
+              for (i = 0, len = ref.length; i < len; i++) {
+                re = ref[i];
+                if (re.localRealEstate) {
+                  lre = re.localRealEstate;
+                  if (!(lre.region instanceof Array)) {
+                    regArr = [];
+                    regArr[0] = lre.region;
+                    lre.region = regArr;
+                  }
+                }
+              }
+              this.set('validSearchResults', results.result);
+            }
+          }
+        }
+      }
     }
   });
 

@@ -47,26 +47,26 @@
             <div class="zestimate-amount">
                 <h2>
                     <span>[[zestimateKind]]</span>
-                    <span>[[getCurrencySign(zestimateData.amount.currency)]]</span>
-                    <span>[[_amountSeparate(zestimateData.amount.Value)]]</span>
+                    <span>[[getCurrencySign(zestimateData.amount._currency)]]</span>
+                    <span>[[_amountSeparate(zestimateData.amount.__text)]]</span>
                 </h2>
             </div>
             <div class="zestimate-change">
                 <div id="zestimate-change-value">
-                    <span>[[getCurrencySign(zestimateData.valueChange.currency)]]</span>
-                    <span>[[zestimateData.valueChange.Value]]</span>
+                    <span>[[getCurrencySign(zestimateData.valueChange._currency)]]</span>
+                    <span>[[zestimateData.valueChange.__text]]</span>
                 </div>
-                <div>Last [[zestimateData.valueChange.duration]] Days</div>
+                <div>Last [[zestimateData.valueChange._duration]] Days</div>
             </div>
             <div class="zestimate-range">
                 <p>
-                    <span>[[getCurrencySign(zestimateData.valuationRange.low.currency)]]</span>
-                    <span>[[_amountSeparate(zestimateData.valuationRange.low.Value)]]</span>
+                    <span>[[getCurrencySign(zestimateData.valuationRange.low._currency)]]</span>
+                    <span>[[_amountSeparate(zestimateData.valuationRange.low.__text)]]</span>
                 </p>
                 <paper-slider disabled value="50"></paper-slider>
                 <p>
-                    <span>[[getCurrencySign(zestimateData.valuationRange.high.currency)]]</span>
-                    <span>[[_amountSeparate(zestimateData.valuationRange.high.Value)]]</span>
+                    <span>[[getCurrencySign(zestimateData.valuationRange.high._currency)]]</span>
+                    <span>[[_amountSeparate(zestimateData.valuationRange.high.__text)]]</span>
                 </p>
             </div>
         </div>

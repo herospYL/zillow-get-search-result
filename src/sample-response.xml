@@ -93,6 +93,14 @@
                             <forSale>http://www.zillow.com/east-queen-anne-seattle-wa/</forSale>
                         </links>
                     </region>
+                    <region name="East Queen Anne" id="271856" type="neighborhood">
+                        <zindexValue>821,600</zindexValue>
+                        <links>
+                            <overview>http://www.zillow.com/local-info/WA-Seattle/East-Queen-Anne/r_271856/</overview>
+                            <forSaleByOwner>http://www.zillow.com/east-queen-anne-seattle-wa/fsbo/</forSaleByOwner>
+                            <forSale>http://www.zillow.com/east-queen-anne-seattle-wa/</forSale>
+                        </links>
+                    </region>
                 </localRealEstate>
             </result>
         </results>
