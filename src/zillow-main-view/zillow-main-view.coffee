@@ -29,15 +29,17 @@ Polymer
 
     showClear: false
     
-    ZWSID: String
+    ZWSID:
+      type: String
+      value: 'X1-ZWz1fi61fdynm3_9r65p'
 
   observers: [
     'hideClear(address, cityState, zip, validSearchResults, invalidSearchResult)'
   ]
 
-  attached: ->
-    @_getZWSID()
-    return
+#  attached: ->
+#    @_getZWSID()
+#    return
 
   hideClear: (address, cityState, zip, validSearchResults, invalidSearchResult) ->
     addressNull = address == undefined or address?.length == 0
@@ -67,8 +69,8 @@ Polymer
 
   fireSearch: ->
     @clearResult()
-    if @ZWSID == undefined || @ZWSID == null
-      @_getZWSID()
+#    if @ZWSID == undefined || @ZWSID == null
+#      @_getZWSID()
 
     queryParam = {}
     queryParam["zws-id"] = @ZWSID
@@ -89,15 +91,15 @@ Polymer
     @fire('toast-error', detail.error)
     return
 
-  _getZWSID: ->
-    promise = @$.xhr.send({
-      url: "http://liangyuanzillowapi.azurewebsites.net/api/zillow",
-      handleAs: 'json'
-    })
-
-    promise.then (result) =>
-      @set('ZWSID', result.response)
-      return
+#  _getZWSID: ->
+#    promise = @$.xhr.send({
+#      url: "http://liangyuanzillowapi.azurewebsites.net/api/zillow",
+#      handleAs: 'json'
+#    })
+#
+#    promise.then (result) =>
+#      @set('ZWSID', result.response)
+#      return
 
   _parseResult: (doc) ->
     if doc

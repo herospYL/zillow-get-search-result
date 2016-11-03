@@ -29,12 +29,12 @@
       isInvalid: Boolean,
       invalidSearchResult: String,
       showClear: false,
-      ZWSID: String
+      ZWSID: {
+        type: String,
+        value: 'X1-ZWz1fi61fdynm3_9r65p'
+      }
     },
     observers: ['hideClear(address, cityState, zip, validSearchResults, invalidSearchResult)'],
-    attached: function() {
-      this._getZWSID();
-    },
     hideClear: function(address, cityState, zip, validSearchResults, invalidSearchResult) {
       var addressNull, cityStateNull, invalidSearchResultNull, validSearchResultsNull, zipNull;
       addressNull = address === void 0 || (address != null ? address.length : void 0) === 0;
@@ -60,9 +60,6 @@
     fireSearch: function() {
       var ajax, queryParam;
       this.clearResult();
-      if (this.ZWSID === void 0 || this.ZWSID === null) {
-        this._getZWSID();
-      }
       queryParam = {};
       queryParam["zws-id"] = this.ZWSID;
       queryParam["address"] = this.address;
@@ -78,18 +75,6 @@
     },
     handleError: function(event, detail) {
       this.fire('toast-error', detail.error);
-    },
-    _getZWSID: function() {
-      var promise;
-      promise = this.$.xhr.send({
-        url: "http://liangyuanzillowapi.azurewebsites.net/api/zillow",
-        handleAs: 'json'
-      });
-      return promise.then((function(_this) {
-        return function(result) {
-          _this.set('ZWSID', result.response);
-        };
-      })(this));
     },
     _parseResult: function(doc) {
       var arr, code, i, jsonObj, len, lre, message, messageText, re, ref, regArr, response, results, searchResults, x2js;
