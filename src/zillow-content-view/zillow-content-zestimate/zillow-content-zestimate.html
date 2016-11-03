@@ -45,27 +45,28 @@
 
         <div class="content-zestimate">
             <div class="zestimate-amount">
-                <h2>Zestimate:
-                    <span>[[zestimateData.amount._currency]]</span>
-                    <span>[[_amountSeparate(zestimateData.amount.__text)]]</span>
+                <h2>
+                    <span>[[zestimateKind]]</span>
+                    <span>[[getCurrencySign(zestimateData.amount.currency)]]</span>
+                    <span>[[_amountSeparate(zestimateData.amount.Value)]]</span>
                 </h2>
             </div>
             <div class="zestimate-change">
                 <div id="zestimate-change-value">
-                    <span>[[zestimateData.valueChange._currency]]</span>
-                    <span>[[zestimateData.valueChange.__text]]</span>
+                    <span>[[getCurrencySign(zestimateData.valueChange.currency)]]</span>
+                    <span>[[zestimateData.valueChange.Value]]</span>
                 </div>
-                <div>Last [[zestimateData.valueChange._duration]] Days</div>
+                <div>Last [[zestimateData.valueChange.duration]] Days</div>
             </div>
             <div class="zestimate-range">
                 <p>
-                    <span>[[zestimateData.valuationRange.low._currency]]</span>
-                    <span>[[_amountSeparate(zestimateData.valuationRange.low.__text)]]</span>
+                    <span>[[getCurrencySign(zestimateData.valuationRange.low.currency)]]</span>
+                    <span>[[_amountSeparate(zestimateData.valuationRange.low.Value)]]</span>
                 </p>
                 <paper-slider disabled value="50"></paper-slider>
                 <p>
-                    <span>[[zestimateData.valuationRange.high._currency]]</span>
-                    <span>[[_amountSeparate(zestimateData.valuationRange.high.__text)]]</span>
+                    <span>[[getCurrencySign(zestimateData.valuationRange.high.currency)]]</span>
+                    <span>[[_amountSeparate(zestimateData.valuationRange.high.Value)]]</span>
                 </p>
             </div>
         </div>

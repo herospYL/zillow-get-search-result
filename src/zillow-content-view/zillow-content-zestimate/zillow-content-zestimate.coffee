@@ -4,9 +4,18 @@ Polymer
   properties:
     zestimateData: Object
 
+    zestimateKind: String
+
   observers: [
-    'valueChangeColor(zestimateData.valueChange.__text)'
+    'valueChangeColor(zestimateData.valueChange.Value)'
   ]
+
+  getCurrencySign: (currency) ->
+    switch currency
+      when 0
+        return '$'
+      else
+        return ''
 
   valueChangeColor: (value) ->
     valueDiv = @$['zestimate-change-value']

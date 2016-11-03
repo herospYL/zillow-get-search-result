@@ -39,50 +39,37 @@
       this.set('validSearchSelected', -1);
       this.set('isInvalid', false);
       this.set('invalidSearchResult', '');
+      Polymer.dom.flush();
     },
     fireSearch: function() {
-      var xhttp;
+      var ajax, queryParam;
       this.clearPage();
-      xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = (function(_this) {
-        return function(result) {
-          if (result.target.readyState === 4 && result.target.status === 200) {
-            return _this._parseResult(xhttp.responseXML);
-          }
-        };
-      })(this);
-      xhttp.open("GET", 'src/sample-response.xml', true);
-      return xhttp.send();
+      queryParam = {};
+      queryParam["address"] = this.address;
+      queryParam["citystatezip"] = this.cityState + " " + this.zip;
+      ajax = this.$.ajax;
+      ajax.params = queryParam;
+      ajax.generateRequest();
     },
-    _constructSearchString: function() {},
-    _parseResult: function(doc) {
-      var arr, code, jsonObj, message, messageText, response, results, searchResults, x2js;
-      if (doc) {
-        x2js = new X2JS();
-        jsonObj = x2js.xml2json(doc);
-        searchResults = jsonObj.searchresults;
-        console.log(searchResults);
-        if (searchResults) {
-          message = searchResults.message;
-          if (message) {
-            code = message.code;
-            if (code !== "0") {
-              messageText = message.text;
-              this.set('invalidSearchResult', messageText);
-              this.set('isInvalid', true);
-            } else {
-              response = searchResults.response;
-              results = response.results;
-              if (!(results.result instanceof Array)) {
-                arr = [];
-                arr[0] = results.result;
-                results.result = arr;
-              }
-              this.set('validSearchResults', results.result);
-            }
+    handleResponse: function(event, detail) {
+      var code, message, messageText, response;
+      if (detail.response) {
+        message = detail.response.message;
+        if (message) {
+          code = message.code;
+          if (code !== "0") {
+            messageText = message.text;
+            this.set('invalidSearchResult', messageText);
+            this.set('isInvalid', true);
+          } else {
+            response = detail.response.response;
+            this.set('validSearchResults', response.results);
           }
         }
       }
+    },
+    handleError: function(event, detail) {
+      this.fire('toast-error', detail.error);
     }
   });
 

@@ -3,7 +3,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-request.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <!--Local Imports-->
 <link rel="import" href="zillow-main-result/zillow-main-result.html">
@@ -62,7 +62,12 @@
 
         </style>
 
-        <iron-request id="xhr"></iron-request>
+        <iron-ajax id="ajax"
+                   url="http://liangyuanzillowapi.azurewebsites.net/api/zillow"
+                   handle-as="json"
+                   on-response="handleResponse"
+                   on-error="handleError"
+                   decounce-duration="300"></iron-ajax>
         <div class="combined-search flex-equal-with-ratios">
             <div class="flexChildEnd">
                 <template is="dom-if" if="[[showClear]]">
@@ -117,4 +122,3 @@
     </template>
 </dom-module>
 <script src="zillow-main-view.js"></script>
-<script src="../xml2json.js"></script>

@@ -24,6 +24,10 @@ Polymer
   observers:
     ['_routePageChanged(routeData.page)']
 
+  listeners: {
+    'toast-error' : '_handleToast'
+  }
+
 #  Default to Index.html
   _routePageChanged: (page) ->
     @page = page || ''
@@ -35,3 +39,9 @@ Polymer
       obj = @validSearchResults[@validSearchSelected]
 
     @set('validSearchSelectedContent', obj)
+
+  _handleToast: (event, detail) ->
+    event.stopPropagation()
+    toast = @$.toast
+    toast.text = detail.message
+    toast.open()

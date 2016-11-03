@@ -25,6 +25,9 @@
       validSearchSelectedContent: Object
     },
     observers: ['_routePageChanged(routeData.page)'],
+    listeners: {
+      'toast-error': '_handleToast'
+    },
     _routePageChanged: function(page) {
       this.page = page || '';
     },
@@ -35,6 +38,13 @@
         obj = this.validSearchResults[this.validSearchSelected];
       }
       return this.set('validSearchSelectedContent', obj);
+    },
+    _handleToast: function(event, detail) {
+      var toast;
+      event.stopPropagation();
+      toast = this.$.toast;
+      toast.text = detail.message;
+      return toast.open();
     }
   });
 

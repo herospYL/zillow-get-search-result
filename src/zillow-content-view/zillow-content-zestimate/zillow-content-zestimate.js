@@ -3,9 +3,18 @@
   Polymer({
     is: 'zillow-content-zestimate',
     properties: {
-      zestimateData: Object
+      zestimateData: Object,
+      zestimateKind: String
     },
-    observers: ['valueChangeColor(zestimateData.valueChange.__text)'],
+    observers: ['valueChangeColor(zestimateData.valueChange.Value)'],
+    getCurrencySign: function(currency) {
+      switch (currency) {
+        case 0:
+          return '$';
+        default:
+          return '';
+      }
+    },
     valueChangeColor: function(value) {
       var valueDiv, valueDivColor;
       valueDiv = this.$['zestimate-change-value'];

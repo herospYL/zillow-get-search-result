@@ -46,54 +46,35 @@ Polymer
     @set('validSearchSelected', -1)
     @set('isInvalid', false)
     @set('invalidSearchResult', '')
+    Polymer.dom.flush()
     return
 
   fireSearch: ->
     @clearPage()
+    queryParam = {}
+    queryParam["address"] = @address
+    queryParam["citystatezip"] = "#{@cityState} #{@zip}"
 
-    xhttp = new XMLHttpRequest()
-    xhttp.onreadystatechange = (result) =>
-      if result.target.readyState == 4 and result.target.status == 200
-        @_parseResult(xhttp.responseXML);
-    xhttp.open("GET", 'src/sample-response.xml', true)
-    xhttp.send()
+    ajax = @$.ajax
+    ajax.params = queryParam
+    ajax.generateRequest()
 
-#    promise = @$.xhr.send({
-#      url: "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1fi61fdynm3_9r65p&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA",
-#      handleAs: 'xml'
-#    })
-#
-#    promise.then (result) =>
-#      console.log(result.response)
-#      obj = result.response.getElementsByTagName('response')[0]
-#      console.log(obj)
-#      return
-
-  _constructSearchString: ->
     return
 
-  _parseResult: (doc) ->
-    if doc
-      x2js = new X2JS()
-      jsonObj = x2js.xml2json(doc)
-      searchResults = jsonObj.searchresults
-      console.log(searchResults)
+  handleResponse: (event, detail) ->
+    if detail.response
+      message = detail.response.message
+      if message
+        code = message.code
+        if code != "0"
+          messageText = message.text
+          @set('invalidSearchResult', messageText)
+          @set('isInvalid', true)
+        else
+          response = detail.response.response
+          @set('validSearchResults', response.results)
+    return
 
-      if searchResults
-        message = searchResults.message
-        if message
-          code = message.code
-          if code != "0"
-            messageText = message.text
-            @set('invalidSearchResult', messageText)
-            @set('isInvalid', true)
-          else
-            response = searchResults.response
-            results = response.results
-            if not (results.result instanceof Array)
-              arr = []
-              arr[0] = results.result
-              results.result = arr
-            @set('validSearchResults', results.result)
-
+  handleError: (event, detail) ->
+    @fire('toast-error', detail.error)
     return

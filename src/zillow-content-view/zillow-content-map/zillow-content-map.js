@@ -16,10 +16,10 @@
       var map, marker;
       map = this.$.gMap;
       marker = this.$.gMarker;
-      map.latitude = parseFloat(this.mapData.latitude);
-      map.longitude = parseFloat(this.mapData.longitude);
-      marker.latitude = parseFloat(this.mapData.latitude);
-      marker.longitude = parseFloat(this.mapData.longitude);
+      map.latitude = this.mapData.latitude;
+      map.longitude = this.mapData.longitude;
+      marker.latitude = this.mapData.latitude;
+      marker.longitude = this.mapData.longitude;
     }
   });
 

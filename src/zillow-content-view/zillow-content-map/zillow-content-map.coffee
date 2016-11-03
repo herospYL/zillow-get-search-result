@@ -16,8 +16,8 @@ Polymer
     map = @$.gMap
     marker = @$.gMarker
 
-    map.latitude = parseFloat(@mapData.latitude)
-    map.longitude = parseFloat(@mapData.longitude)
-    marker.latitude = parseFloat(@mapData.latitude)
-    marker.longitude = parseFloat(@mapData.longitude)
+    map.latitude = @mapData.latitude
+    map.longitude = @mapData.longitude
+    marker.latitude = @mapData.latitude
+    marker.longitude = @mapData.longitude
     return
