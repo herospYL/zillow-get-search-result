@@ -16,8 +16,8 @@ Simply type in address with city and state (optional: zip) to search for real es
 
 ### Components
 
-Entrance: zillow-app.html
-Home page and search bar: zillow-main-view.html
-Content page: zillow-content-view.html
-Footer: zillow-footer.html
-404 Page: zillow-view404.html
+* Entrance: zillow-app.html
+* Home page and search bar: zillow-main-view.html
+* Content page: zillow-content-view.html
+* Footer: zillow-footer.html
+* 404 Page: zillow-view404.html
