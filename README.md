@@ -3,7 +3,7 @@
 This is an implementation of Zillow Get Search Results API
 
 ### Site URL:
-liangyuanzillow.azurewebsites.net
+http://liangyuanzillow.azurewebsites.net
 
 ### Prerequisites and Setup
 This website is written in [Polymer](https://www.polymer-project.org/1.0/)
